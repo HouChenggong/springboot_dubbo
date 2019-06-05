@@ -1,29 +1,31 @@
-HELP.md
-/target/
-!.mvn/wrapper/maven-wrapper.jar
+#不需要提交按的文件夹
+.idea/
+.mvn/
+mydubbo.iml
+father.iml
 
-### STS ###
-.apt_generated
-.classpath
-.factorypath
-.project
-.settings
-.springBeans
-.sts4-cache
+api/.settings/
+api/.mvn/
+api/.svn/
+api/target/
+api/cobot-bigdata-servicemodel.iml
+api/.classpath
+api/.project
 
-### IntelliJ IDEA ###
-.idea
-*.iws
-*.iml
-*.ipr
+consumer/.settings/
+consumer/.mvn/
+consumer/.svn/
+consumer/target/
+consumer/cobot-bigdata-servicemodel.iml
+consumer/.classpath
+consumer/.project
 
-### NetBeans ###
-/nbproject/private/
-/nbbuild/
-/dist/
-/nbdist/
-/.nb-gradle/
-/build/
 
-### VS Code ###
-.vscode/
+
+provider/.settings/
+provider/.mvn/
+provider/.svn/
+provider/target/
+provider/cobot-bigdata-servicemodel.iml
+provider/.classpath
+provider/.project
