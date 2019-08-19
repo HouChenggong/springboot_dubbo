@@ -1,31 +1,26 @@
 #不需要提交按的文件夹
 .idea/
 .mvn/
-mydubbo.iml
-father.iml
+*.iml
+mvnw
+mvnw.cmd
 
-api/.settings/
-api/.mvn/
-api/.svn/
+
 api/target/
-api/cobot-bigdata-servicemodel.iml
-api/.classpath
-api/.project
 
-consumer/.settings/
-consumer/.mvn/
-consumer/.svn/
+
+
 consumer/target/
-consumer/cobot-bigdata-servicemodel.iml
-consumer/.classpath
-consumer/.project
 
 
 
-provider/.settings/
-provider/.mvn/
-provider/.svn/
+
+
 provider/target/
-provider/cobot-bigdata-servicemodel.iml
-provider/.classpath
-provider/.project
+
+
+
+
+user/user-api/target/
+user/user-consumer/target/
+user/user-provider/target/
