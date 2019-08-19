@@ -6,6 +6,9 @@ mvnw
 mvnw.cmd
 
 
+## 自动生成代码的位置
+src/
+
 api/target/
 
 
