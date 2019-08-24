@@ -38,8 +38,23 @@
             <artifactId>spring-web</artifactId>
             <version>5.1.7.RELEASE</version>
         </dependency>
-
-
+<!--        <dependency>-->
+<!--            <groupId>com.alibaba</groupId>-->
+<!--            <artifactId>druid-spring-boot-starter</artifactId>-->
+<!--            <version>1.1.10</version>-->
+<!--            <scope>compile</scope>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>mysql</groupId>-->
+<!--            <artifactId>mysql-connector-java</artifactId>-->
+<!--            <version>8.0.14</version>-->
+<!--        </dependency>-->
+        <!-- 这是mybatis-plus依赖 -->
+<!--        <dependency>-->
+<!--            <groupId>com.baomidou</groupId>-->
+<!--            <artifactId>mybatis-plus-boot-starter</artifactId>-->
+<!--            <version>3.1.2</version>-->
+<!--        </dependency>-->
     </dependencies>
 
 

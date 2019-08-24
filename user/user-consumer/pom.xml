@@ -87,11 +87,13 @@
             </exclusions>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/com.auth0/java-jwt -->
         <dependency>
             <groupId>com.auth0</groupId>
             <artifactId>java-jwt</artifactId>
-            <version>3.2.0</version>
+            <version>3.8.2</version>
         </dependency>
+
 
     </dependencies>
 
