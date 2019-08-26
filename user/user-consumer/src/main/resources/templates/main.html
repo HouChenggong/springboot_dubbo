@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+	<meta charset="utf-8">
+	<title>首页--layui后台管理模板 2.0</title>
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="format-detection" content="telephone=no">
+	<link rel="stylesheet" href="/static/layui/css/layui.css" media="all" />
+	<link rel="stylesheet" href="/static/css/public.css" media="all" />
+</head>
+<body class="childrenBody">
+	<blockquote class="layui-elem-quote layui-bg-green">
+		<div id="nowTime"><shiro:principal property="userName" /></div>
+	</blockquote>
+	<div class="layui-row layui-col-space10 panel_box" shiro:hasRole="admin">
+		<div class="panel layui-col-xs12 layui-col-sm6 layui-col-md4 layui-col-lg3">
+			<a href="javascript:;" data-url="https://fly.layui.com/case/u/23248176" target="_blank">
+				<div class="panel_icon layui-bg-green">
+					<i class="layui-anim seraph icon-good"></i>
+				</div>
+				<div class="panel_word">
+					<span>为我点赞</span>
+					<cite>点赞地址</cite>
+				</div>
+			</a>
+		</div>
+		<div class="panel layui-col-xs12 layui-col-sm6 layui-col-md4 layui-col-lg3">
+			<a href="javascript:;" data-url="https://gitee.com/xieke90/tyqx-cms" target="_blank">
+				<div class="panel_icon layui-bg-red">
+					<i class="layui-anim seraph icon-oschina"></i>
+				</div>
+				<div class="panel_word">
+					<span>码云</span>
+					<cite>源码下载</cite>
+				</div>
+			</a>
+		</div>
+		<div class="panel layui-col-xs12 layui-col-sm6 layui-col-md4 layui-col-lg3">
+			<a href="javascript:;" data-url="/user/list.html">
+				<div class="panel_icon layui-bg-orange">
+					<i class="layui-anim seraph icon-icon10"></i>
+				</div>
+				<div class="panel_word userAll">
+					<span></span>
+					<em>用户总数</em>
+					<cite class="layui-hide">用户中心</cite>
+				</div>
+			</a>
+		</div>
+		<div class="panel layui-col-xs12 layui-col-sm6 layui-col-md4 layui-col-lg3">
+			<a href="javascript:;" data-url="/icon/icons.html">
+				<div class="panel_icon layui-bg-cyan">
+					<i class="layui-anim layui-icon">&#xe857;</i>
+				</div>
+				<div class="panel_word outIcons">
+					<span></span>
+					<em>外部图标</em>
+					<cite class="layui-hide">图标管理</cite>
+				</div>
+			</a>
+		</div>
+	</div>
+	<blockquote class="layui-elem-quote main_btn">
+		<p>本系统模板采用layuiCMS2.0，基于Layui2.*实现，支持除LayIM外所有的Layui组件。<a href="http://layim.layui.com/#getAuth" target="_blank" class="layui-btn layui-btn-xs">获取LayIM授权</a>　layui开发文档地址：<a class="layui-btn layui-btn-xs layui-btn-danger" target="_blank" href="http://www.layui.com/doc">layui文档</a> 技术交流QQ群：<a target="_blank" href="//shang.qq.com/wpa/qunwpa?idkey=f6c427d727e544360daa26d49e90aeac6b010109a766c530a1cff10c30f1a158"><img border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="Java技术社区" title="Java技术社区"></a></p>
+		<p class="layui-red">郑重提示：本系统模版来源于互联网，仅供学习交流使用，如需用作商业用途，请联系原作者购买！</p>
+		<p>注：本系统完全开源免费，基于springboot、mybatisplus、shiro、dubbo、zookeeper、log4j、layuicms2.0、mysql5.6、redis、jdk1.8开发而成，内置代码生成器、能够快速生成controller层，service层、dao层、实体层简单完整的增删改查代码，节省开发时间，快速构建企业级的web应用系统。具备完整的权限管理功能，代码简洁，容易入门，方便您进行二次开发。</p>
+		<p class="layui-blue">PS：本人技术有限，有问题的地方请指正，谢谢大家！同时诚邀志同道合的朋友加入一道为开源做贡献！开源开发QQ群：<a target="_blank" href="//shang.qq.com/wpa/qunwpa?idkey=4503c22b19d787af5f6e11f5d04904c833829cbb993667fa3ef9c9a266954046"><img border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="专注开源开发" title="专注开源开发"></a></p>
+	</blockquote>
+	<script type="text/javascript" src="/static/layui/layui.js"></script>
+	<script type="text/javascript" src="/static/js/main.js"></script>
+</body>
+</html>

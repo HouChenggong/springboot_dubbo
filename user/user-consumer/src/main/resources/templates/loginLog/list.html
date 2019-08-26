@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+	<meta charset="utf-8">
+	<title>登录日志列表--layui后台管理模板 2.0</title>
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="format-detection" content="telephone=no">
+	<link rel="stylesheet" href="/static/layui/css/layui.css" media="all" />
+	<link rel="stylesheet" href="/static/css/public.css" media="all" />
+</head>
+<body class="childrenBody">
+<form class="layui-form">
+	<blockquote class="layui-elem-quote quoteBox">
+		<form class="layui-form">
+			<div class="layui-inline">
+                <div class="layui-input-inline">
+                    <input type="text" class="layui-input userName" placeholder="请输入用户名"/>
+                </div>
+                <div class="layui-input-inline">
+                    <input type="text" class="layui-input" id="loginTime" placeholder="请选择日期范围"/>
+                </div>
+                <a class="layui-btn search_btn" data-type="reload">搜索</a>
+			</div>
+		</form>
+	</blockquote>
+	<table id="loginLogList" lay-filter="loginLogList"></table>
+</form>
+<script type="text/javascript" src="/static/layui/layui.js"></script>
+<script type="text/javascript" src="/static/js/loginLog/list.js"></script>
+</body>
+</html>
