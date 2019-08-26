@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+	<meta charset="utf-8">
+	<title>角色列表--layui后台管理模板 2.0</title>
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="format-detection" content="telephone=no">
+	<link rel="stylesheet" href="/static/layui/css/layui.css" media="all" />
+	<link rel="stylesheet" href="/static/css/public.css" media="all" />
+</head>
+<body class="childrenBody">
+<form class="layui-form">
+	<blockquote class="layui-elem-quote quoteBox">
+		<form class="layui-form">
+			<div class="layui-inline">
+				<div class="layui-input-inline">
+					<input type="text" class="layui-input roleCode" placeholder="请输入角色编码" />
+				</div>
+				<div class="layui-input-inline">
+					<input type="text" class="layui-input roleName" placeholder="请输入角色名称" />
+				</div>
+				<div class="layui-input-inline">
+					<select class="available">
+						<option value="">请选择角色状态</option>
+						<option value="1">启用</option>
+						<option value="0">禁用</option>
+					</select>
+				</div>
+				<a class="layui-btn search_btn" data-type="reload">搜索</a>
+			</div>
+			<div class="layui-inline" shiro:hasPermission="role:add">
+				<a class="layui-btn layui-btn-normal add_btn">添加</a>
+			</div>
+			<div class="layui-inline" shiro:hasPermission="role:edit">
+				<a class="layui-btn layui-btn-warm layui-btn-normal edit_btn">编辑</a>
+			</div>
+			<div class="layui-inline" shiro:hasPermission="role:del">
+				<a class="layui-btn layui-btn-danger layui-btn-normal delAll_btn">删除</a>
+			</div>
+		</form>
+	</blockquote>
+	<table id="roleList" lay-filter="roleList"></table>
+</form>
+<script type="text/javascript" src="/static/layui/layui.js"></script>
+<script type="text/javascript" src="/static/js/role/list.js"></script>
+</body>
+</html>

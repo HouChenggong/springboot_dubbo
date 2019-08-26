@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>修改用户--layui后台管理模板 2.0</title>
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="format-detection" content="telephone=no">
+	<link rel="stylesheet" href="/static/layui/css/layui.css" media="all" />
+	<link rel="stylesheet" href="/static/css/public.css" media="all" />
+</head>
+<body class="childrenBody">
+<form class="layui-form layui-row">
+	<div class="layui-col-md6 layui-col-xs12" style="margin: 35px;">
+		<input type="hidden" id="id" name="id" value="">
+		<input type="hidden" id="state" name="state" value="">
+		<div class="layui-form-item">
+			<label class="layui-form-label">用户姓名</label>
+			<div class="layui-input-block">
+				<input type="text" class="layui-input" id="name" name="name" lay-verify="required" placeholder="请输入用户名">
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<label class="layui-form-label">登录名称</label>
+			<div class="layui-input-block">
+				<input type="text" class="layui-input" id="userName" name="userName" lay-verify="required" disabled>
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<label class="layui-form-label">所属角色</label>
+			<div class="layui-input-block">
+				<input type="text" class="layui-input" id="roleName" name="roleName" lay-verify="required" disabled>
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<label class="layui-form-label">用户状态</label>
+			<div class="layui-input-block">
+				<input type="text" class="layui-input" id="stateStr" name="stateStr" lay-verify="required" disabled>
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<div class="layui-input-block">
+				<button class="layui-btn" lay-submit lay-filter="editUser">立即保存</button>
+			</div>
+		</div>
+	</div>
+</form>
+<script type="text/javascript" src="/static/layui/layui.js"></script>
+<script type="text/javascript" src="/static/js/user/center.js"></script>
+</body>
+</html>
