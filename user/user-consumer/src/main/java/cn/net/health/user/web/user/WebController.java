@@ -7,6 +7,8 @@ import cn.net.health.user.service.IUserService;
 import cn.net.health.user.shiro.ShiroKit;
 import cn.net.health.user.util.JWTUtil;
 import com.alibaba.dubbo.config.annotation.Reference;
+
+import com.mydubbo.common.service.CacheService;
 import io.swagger.annotations.*;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.SecurityUtils;
@@ -15,6 +17,8 @@ import org.apache.shiro.authz.annotation.*;
 import org.apache.shiro.subject.Subject;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,6 +30,13 @@ public class WebController {
     @Reference(version = "1.0.0")
     private IUserService userService;
 
+    @Reference(version = "${demo.service.version}")
+    private CacheService cacheService;
+
+    @Autowired
+    private StringRedisTemplate stringRedisTemplate;
+    @Autowired
+    private RedisTemplate<String,String> redisTemplate;
 
     @ApiOperation(value = "登录接口", notes = "登录")
     @ApiImplicitParams({
@@ -38,7 +49,13 @@ public class WebController {
         SysUser userBean = userService.findUserInfo(username);
         String encodePassword = ShiroKit.md5(password, password);
         if (userBean.getPassWord().equals(encodePassword)) {
-            return new ResultInfo("200", "Login success", JWTUtil.sign(username, encodePassword));
+            String jwt =JWTUtil.sign(username, encodePassword);
+            redisTemplate.opsForValue().set("jwaat_"+username,jwt,12000L);
+            stringRedisTemplate.opsForValue().set("jwt_"+username,jwt,12000L);
+            cacheService.setCacheToRedis("1234", "撒旦阿松大2232", 6000L);
+            String re = String.valueOf(cacheService.getCacheByKey("1234"));
+            System.out.println(re+cacheService.getExpire("1234"));
+            return new ResultInfo("200", "Login success",jwt );
         } else {
             throw new UnauthorizedException();
         }

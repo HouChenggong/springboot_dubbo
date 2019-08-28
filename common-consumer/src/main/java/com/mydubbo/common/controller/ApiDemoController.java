@@ -7,6 +7,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 import com.mydubbo.common.service.ApiDemoService;
 
+/**
+ * @author xiyou
+ */
 @RestController
 public class ApiDemoController {
 

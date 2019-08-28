@@ -11,6 +11,10 @@ import org.apache.ibatis.annotations.Select;
 import java.util.List;
 
 
+/**
+ * @author xiyou
+ * 测试读写分离和主从复制的接口
+ */
 @Mapper
 public interface UserCommonMapper extends BaseMapper<UserCommon> {
 

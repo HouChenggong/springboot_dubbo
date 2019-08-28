@@ -5,6 +5,9 @@ import com.alibaba.dubbo.config.annotation.Service;
 import com.mydubbo.common.service.ApiDemoService;
 
 
+/**
+ * @author xiyou
+ */
 @Service(version = "${demo.service.version}")
 public class ApiDemoServiceImpl implements ApiDemoService {
     @Override
