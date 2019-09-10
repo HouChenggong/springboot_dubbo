@@ -8,7 +8,9 @@ import org.springframework.data.redis.serializer.SerializationException;
 
 import java.nio.charset.Charset;
 
-/*
+/**
+ * @author xiyou
+ */ /*
 要实现对象的缓存，定义自己的序列化和反序列化器。使用阿里的fastjson来实现的比较多。
  */
 public class FastJsonRedisSerializer<T> implements RedisSerializer<T> {
