@@ -162,3 +162,5 @@ public ResultInfo requirePermissionS() {
 6. 如果有特殊情况，建议用bigDecimal或者字符串
 
 
+## 5. 整合ES
+文章地址：https://blog.csdn.net/qq_39455116/article/details/101692511
