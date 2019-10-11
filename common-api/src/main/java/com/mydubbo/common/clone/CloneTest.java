@@ -9,12 +9,13 @@ public class CloneTest {
         Person source = new Person();
         source.setName("p1");
         source.setDog(dog1);
-        Person target = (Person) SerializationUtils.clone(source);
+        Person target = (Person) CloneUtils.clone(source);
         System.out.println("被克隆对象: " + source.hashCode() + "\n" +
                 "被克隆对象内的dog属性: " + source.getDog().hashCode() + "         " + source.toString());
 
         System.out.println("克隆出来的对象: " + target.hashCode() + "\n" +
                 "克隆出来的对象内的dog属性: " + target.getDog().hashCode() + "         " + target.toString());
+        System.out.println("eq:"+target.equals(source));
 
         System.out.println("------------------上面是直接进行深复制，不改变复制后的对象任何值----------------------");
         YourDog dog2 =new YourDog();
@@ -30,7 +31,7 @@ public class CloneTest {
 
         System.out.println("克隆出来的对象: " + target2.hashCode() + "\n" +
                 "克隆出来的对象内的dog属性: " + target2.getDog().hashCode() + "         " + target2.toString());
-
+        System.out.println("eq:"+target2.equals(source2));
 
 
 
@@ -50,7 +51,7 @@ public class CloneTest {
 
         System.out.println("克隆出来的对象: " + target3.hashCode() + "\n" +
                 "克隆出来的对象内的dog属性: " + target3.getDog().hashCode() + "         " + target3.toString());
-
+        System.out.println("eq:"+target3.equals(source3));
         System.out.println("--------------上面是改变复制后对象的引用类的属性，不改变普通属性--------------------------");
     }
 
