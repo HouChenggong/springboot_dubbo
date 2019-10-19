@@ -10,6 +10,7 @@
         <module>user</module>
         <module>tools</module>
         <module>elasticsearch</module>
+        <module>mongo</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>

@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<!DOCTYPE mycat:schema SYSTEM "schema.dtd">
+<mycat:schema xmlns:mycat="http://io.mycat/">
+
+	<schema name="javaboy" checkSQLschema="true" sqlMaxLimit="100">
+			<!--A：方案，下面两个t_user 和company都是水平分表，即在一个IP为192.168.1.1的数据库中，
+			创建名称不相同的库db1,db2 ,db3 ，具体分配几个库，看下面的dataNode的配置，
+			一条数据往这3个库中塞入数据，三个库只有这一条数据
+			-->
+		<table name="t_user" dataNode="dn1,dn2,dn3" rule="auto-sharding-long" />
+		<table name="company" dataNode="dn1,dn2,dn3" rule="auto-sharding-long" />
+		
+			<!--  B：方案  tb_global tb_global_td 是GLOBAL了些的分库，即在一个IP为192.168.1.1的数据库中，
+			创建名称不相同的库db1,db2 ,db3 ，具体分配几个库，看下面的dataNode的配置，
+			一条数据往这3个库中塞入一样的数据，三个库都有这条数据
+			-->
+		<table name="tb_global" dataNode="dn1,dn2,dn3" type="global" rule="auto-sharding-long" />
+		<table name="tb_global_td" dataNode="dn1,dn2,dn3" type="global" rule="auto-sharding-long" />		
+		
+		
+		
+			<!-- C：方案  enum_tb ,enum_tb_table 是sharding-by-intfile 枚举分片，即在一个IP为192.168.1.1的数据库中，
+			创建名称不相同的库db1,db2 ,db3 ，具体分配几个库，看下面的dataNode的配置，
+			一条数据往这3个库中塞入一样的数据，三个库都有这条数据,其实和A方案类型，但是不相同的是在数据表中专门设计一个字段，
+			以后根据这个字段的值来决定数据插入到哪个 dataNode 上。而且还要再rule.xml中配置枚举的数据
+			-->
+		<table name="enum_tb" dataNode="dn1,dn2,dn3"   rule="sharding-by-intfile" />
+		<table name="enum_tb_table" dataNode="dn1,dn2,dn3"  rule="sharding-by-intfile" />	
+		
+		
+		<!-- D方案，id取模
+ 	 
+			-->
+		<table name="mod_tb_table" dataNode="dn1,dn2,dn3"   rule="mod-long" />
+		
+		<!-- E方案，id HASH
+ 	 
+			-->
+		<table name="hash_tb_table" dataNode="dn1,dn2,dn3"   rule="sharding-by-murmur" />
+	</schema>
+	<!-- <dataNode name="dn1$0-743" dataHost="localhost1" database="db$0-743"
+		/> -->
+	<dataNode name="dn1" dataHost="localhost1" database="db1" />
+	<dataNode name="dn2" dataHost="localhost1" database="db2" />
+	<dataNode name="dn3" dataHost="localhost1" database="db3" />
+ 
+	<dataHost name="localhost1" maxCon="1000" minCon="10" balance="0"
+			  writeType="0" dbType="mysql" dbDriver="native" switchType="1"  slaveThreshold="100">
+		<heartbeat>select user()</heartbeat>
+		<!-- can have multi write hosts -->
+		<writeHost host="hostM1" url="101.200.55.12:10000" user="root"
+				   password="root">
+			<!-- can have multi read hosts -->
+			<readHost host="hostS2" url="101.200.55.12:10001" user="root" password="root" />
+		</writeHost>
+	</dataHost>
+ 
+</mycat:schema>
