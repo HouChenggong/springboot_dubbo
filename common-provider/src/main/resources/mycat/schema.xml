@@ -37,6 +37,11 @@
  	 
 			-->
 		<table name="hash_tb_table" dataNode="dn1,dn2,dn3"   rule="sharding-by-murmur" />
+		
+				<!-- F方案，单库，根据id id取模 分成3个表one_database_1,one_database_2,one_database_3
+ 	 
+			-->
+		<table name="one_database"  primaryKey="id" autoIncrement="true" subTables="one_database_$1-3" dataNode="dn1"  rule="mod-long"  />
 	</schema>
 	<!-- <dataNode name="dn1$0-743" dataHost="localhost1" database="db$0-743"
 		/> -->
