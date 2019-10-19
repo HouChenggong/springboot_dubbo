@@ -18,9 +18,13 @@ import java.util.List;
 @Mapper
 public interface UserCommonMapper extends BaseMapper<UserCommon> {
 
-  @Insert("INSERT INTO user (name,age) values (#{name},#{age})")
-  boolean addUser(@Param("name") String name, @Param("age") Integer age);
+    @Insert("INSERT INTO user (name,age) values (#{name},#{age})")
+    boolean addUser(@Param("name") String name, @Param("age") Integer age);
 
-  @Select("SELECT * FROM user where age > #{age}")
-  List<UserCommon> selectUsers(@Param("age") Integer age);
+    @Select("SELECT * FROM user where age > #{age}")
+    List<UserCommon> selectUsers(@Param("age") Integer age);
+
+
+    @Select("SELECT id  FROM one_database where id = #{id}")
+    List<Integer> selectOneDatabase(@Param("id") Integer id);
 }

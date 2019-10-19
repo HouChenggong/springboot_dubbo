@@ -134,4 +134,12 @@ spring:
           driver-class-name: com.mysql.jdbc.Driver
           type: com.alibaba.druid.pool.DruidDataSource
           url: jdbc:mysql://101.200.55.12:3306/duo_data?characterEncoding=utf8&serverTimezone=Asia/Shanghai
+        mycat_1:
+          username: root
+          password: root
+          driver-class-name: com.mysql.jdbc.Driver
+          type: com.alibaba.druid.pool.DruidDataSource
+          url: jdbc:mysql://192.168.1.100:8066/javaboy?characterEncoding=utf8&serverTimezone=Asia/Shanghai
 
+## mycat_1是mycat管理下的主从复制，读写分离，分库分表，一库多表等，具体搭建流程可以参考
+## https://blog.csdn.net/qq_39455116/article/details/95335061

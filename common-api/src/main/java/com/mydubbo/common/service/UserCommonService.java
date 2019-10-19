@@ -7,6 +7,7 @@ import java.util.List;
 
 /**
  * 当前接口是测试主从复制，读写分离的接口
+ *
  * @author xiyou
  */
 public interface UserCommonService {
@@ -16,4 +17,13 @@ public interface UserCommonService {
     List selectUsersFromDs(String key);
 
     List selectUserFromDsGroup(String key);
+
+
+    /**
+     * 从mycat里面查询
+     *
+     * @param id
+     * @return
+     */
+    List selectFromMycat(Integer id);
 }

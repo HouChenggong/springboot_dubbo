@@ -50,4 +50,14 @@ public class UserCommonController {
     public List sel1() {
         return userCommonService.selectUsersFromDs("slave1");
     }
+
+    /**
+     * 从mycat里面查询
+     *
+     * @return
+     */
+    @GetMapping("/user/mycat")
+    public List mycat(Integer id) {
+        return userCommonService.selectFromMycat(id);
+    }
 }
