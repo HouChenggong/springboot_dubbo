@@ -2,6 +2,7 @@ package com.mydubbo.common.controller;
 
 
 import com.alibaba.dubbo.config.annotation.Reference;
+import com.mydubbo.common.entity.WordDTO;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,4 +26,13 @@ public class ApiDemoController {
     }
 
 
+    @GetMapping("/test/dubbo")
+    public String sayHello( ) {
+        WordDTO wordDTO =new WordDTO();
+        wordDTO.setId((long) 23333);
+        wordDTO.setTimestamp((long) 1223343434);
+        wordDTO.setUuid("uuid");
+        wordDTO.setWord("word");
+        return apiDemoService.testError(wordDTO);
+    }
 }
