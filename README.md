@@ -1,4 +1,5 @@
 
+
 # 1. 本系统构建环境
 
 | 技术选择               | 列表             | 依赖信息                                                     | 主要作用                                                     | 官网                                                 |
@@ -164,3 +165,12 @@ public ResultInfo requirePermissionS() {
 
 ## 5. 整合ES
 文章地址：https://blog.csdn.net/qq_39455116/article/details/101692511
+
+
+## 6. 算法刷题
+
+|题目|解答  |
+|--|--|
+|[无重复最长子字符串的长度](https://leetcode-cn.com/problems/longest-substring-without-repeating-characters/submissions/)  |  [我的代码](https://github.com/HouChenggong/springboot_dubbo/blob/master/tools/src/main/java/cn/net/health/tools/str/LengthOfLongestSubstring.java)|
+[最长回文字符串](https://leetcode-cn.com/problems/longest-palindromic-substring/)| [github代码](https://github.com/HouChenggong/springboot_dubbo/blob/master/tools/src/main/java/cn/net/health/tools/str/LongestPalindrome.java)  | 
+|[Z字形变换](https://leetcode-cn.com/problems/zigzag-conversion/)|[github代码](https://github.com/HouChenggong/springboot_dubbo/commit/2a17b3de081d26386e0160ae0a5a6d6635d74658)|
