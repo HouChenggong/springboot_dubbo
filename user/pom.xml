@@ -15,6 +15,7 @@
         <module>user-api</module>
         <module>user-provider</module>
         <module>user-consumer</module>
+        <module>user-mongodb</module>
     </modules>
 
 
