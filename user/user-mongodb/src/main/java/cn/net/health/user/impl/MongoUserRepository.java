@@ -65,7 +65,7 @@ public class MongoUserRepository {
      * @return
      * @throws Exception
      */
-    public MongoUser queryById(final Integer id) throws Exception {
+    public MongoUser queryById(final String id) throws Exception {
         return mongoTemplate.findById(id, MongoUser.class);
     }
 
@@ -73,11 +73,12 @@ public class MongoUserRepository {
      * //TODO:查询-带条件查询
      *
      * @param name
+     * @param column 要查询的字段
      * @return
      * @throws Exception
      */
-    public List<MongoUser> queryByName(final String name) throws Exception {
-        Criteria criteria = Criteria.where("name").is(name);
+    public List<MongoUser> queryByName(final String name, String column) throws Exception {
+        Criteria criteria = Criteria.where(column).is(name);
         return mongoTemplate.find(Query.query(criteria), MongoUser.class);
     }
 
@@ -85,13 +86,14 @@ public class MongoUserRepository {
      * //TODO:更新
      *
      * @param user
+     * @param byColumn 根据什么字段更新
      * @throws Exception
      */
     @Transactional(rollbackFor = Exception.class)
-    public void update(final MongoUser user) throws Exception {
-
-        Query query = Query.query(Criteria.where("id").is(user.getUserId()));
-        Update update = Update.update("name", user.getUserName()).set("code", user.getPhone()).set("email", user.getQq());
+    public void update(final MongoUser user, String byColumn) throws Exception {
+        Query query = Query.query(Criteria.where(byColumn).is(user.getUserId()));
+        //下面更新的字段必须是原本有的字段,如果没有相关的字段，mongo会自动添加字段，因为mongo存的是JSON类型的document
+        Update update = Update.update("userName", user.getUserName()).set("phone", user.getPhone() + "phone").set("qq", user.getQq() + "qq");
         mongoTemplate.updateFirst(query, update, MongoUser.class);
     }
 }

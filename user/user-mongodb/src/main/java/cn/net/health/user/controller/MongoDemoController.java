@@ -113,4 +113,39 @@ public class MongoDemoController {
     }
 
 
+    @ApiOperation(value = "根据主键id查询单个", notes = "根据name查询列表")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "userId", value = "用户标识", required = true, paramType = "query", dataType = "String"),
+            @ApiImplicitParam(name = "name", value = "name", required = true, paramType = "query", dataType = "String")
+    })
+    @RequestMapping(value = "/selectByIdOrName", method = RequestMethod.GET)
+    public void method3(String userId, String name) throws Exception {
+        log.info("---单元测试3---");
+        MongoUser entity = mongoUserRepository.queryById(userId);
+        log.info("---根据主键id查询={},结果={}---", userId, entity);
+        //column是要查询的字段
+        String column = "userName";
+        List<MongoUser> list = mongoUserRepository.queryByName(name, column);
+        log.info("---根据姓名查询,name={},结果={}---", name, list);
+    }
+
+    @ApiOperation(value = "updateById", notes = "updateById")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "userId", value = "用户标识", required = true, paramType = "query", dataType = "String")
+    })
+    @RequestMapping(value = "/updateById", method = RequestMethod.POST)
+    public void method4(String userId) throws Exception {
+        log.info("---单元测试4---");
+
+        MongoUser entity = new MongoUser();
+        entity = mongoUserRepository.queryById(userId);
+        log.info("---根据主键id查询,结果={}---", entity);
+        entity.setNickName("UPDATE");
+        entity.setUserName("userUpdate");
+        //根据userid更新
+        mongoUserRepository.update(entity, "userId");
+        entity = mongoUserRepository.queryById(userId);
+        log.info("---根据主键id查询,结果={}---", entity);
+    }
+
 }
