@@ -20,12 +20,6 @@
 
         <dependency>
             <groupId>com.mydubbo</groupId>
-            <artifactId>common-api</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.mydubbo</groupId>
             <artifactId>user-provider</artifactId>
             <version>0.0.1-SNAPSHOT</version>
             <scope>compile</scope>

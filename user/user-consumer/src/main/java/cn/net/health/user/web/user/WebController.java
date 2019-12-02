@@ -8,7 +8,7 @@ import cn.net.health.user.shiro.ShiroKit;
 import cn.net.health.user.util.JWTUtil;
 import com.alibaba.dubbo.config.annotation.Reference;
 
-import com.mydubbo.common.service.CacheService;
+//import com.mydubbo.common.service.CacheService;
 import io.swagger.annotations.*;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.SecurityUtils;
@@ -30,8 +30,8 @@ public class WebController {
     @Reference(version = "1.0.0")
     private IUserService userService;
 
-    @Reference(version = "${demo.service.version}")
-    private CacheService cacheService;
+//    @Reference(version = "${demo.service.version}")
+//    private CacheService cacheService;
 
     @Autowired
     private StringRedisTemplate stringRedisTemplate;
