@@ -11,13 +11,11 @@ import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author xiyou
@@ -148,4 +146,80 @@ public class MongoDemoController {
         log.info("---根据主键id查询,结果={}---", entity);
     }
 
+
+    /**
+     * 删除
+     *
+     * @param userId
+     * @throws Exception
+     */
+    @ApiOperation(value = "deleteById", notes = "deleteById")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "userId", value = "用户标识", required = true, paramType = "query", dataType = "String")
+    })
+    @DeleteMapping(value = "/deleteById")
+    public void deleteById(String userId) throws Exception {
+        log.info("---单元测试5-删除---");
+        mongoUserRepository.delete(userId, "userId");
+        MongoUser entity = mongoUserRepository.queryById(userId);
+        log.info("---根据主键id查询,结果={}---", entity);
+    }
+
+
+    @ApiOperation(value = "批量插入", notes = "批量插入")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "num", value = "要插入几千条数据，注意1就是1000，10是一万", required = true, paramType = "query", dataType = "String")
+    })
+    @RequestMapping(value = "/insertListNum", method = RequestMethod.POST)
+    public String insertList(Integer num) {
+        for (int j = 0; j < num; j++) {
+            List<MongoUser> list = new ArrayList<>(1000);
+            for (int i = 0; i < 1000; i++) {
+                MongoUser mongoUser = new MongoUser();
+                mongoUser.setUserId(String.valueOf(snowFlake.makeNextId()));
+                mongoUser.setUserName("name_" + j * 1000 + i);
+                mongoUser.setNickName("nick_name_" + j * 1000 + i);
+                mongoUser.setPassWord("xiyou");
+                list.add(mongoUser);
+            }
+            try {
+                mongoUserRepository.saveAll(list);
+                log.info("-----批量插入成功一千条记录-----");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return "批量插入了：" + num * 1000 + "条记录";
+    }
+
+    @ApiOperation(value = "分页查询", notes = "分页查询")
+    @RequestMapping(value = "/selectByPage", method = RequestMethod.GET)
+    public void selectByPage() throws Exception {
+        log.info("---单元测试6-分页查询---");
+        final Integer pageSize = 10;
+
+        Integer pageNo = 1;
+        Map<String, Object> resMap = mongoUserRepository.queryPage(pageNo, pageSize, "passWord", "xiyou");
+        log.info("---分页查询pageNo={} pageSize={} 结果={}\n\n", pageNo, pageSize, resMap);
+
+        pageNo = 2;
+        resMap = mongoUserRepository.queryPage(pageNo, pageSize, "passWord", "xiyou");
+        log.info("---分页查询pageNo={} pageSize={} 结果={}\n\n", pageNo, pageSize, resMap);
+
+        pageNo = 3;
+        resMap = mongoUserRepository.queryPage(pageNo, pageSize, "passWord", "xiyou");
+        log.info("---分页查询pageNo={} pageSize={} 结果={}\n\n", pageNo, pageSize, resMap);
+
+        pageNo = 800;
+        resMap = mongoUserRepository.queryPage(pageNo, pageSize, "passWord", "xiyou");
+        log.info("---分页查询pageNo={} pageSize={} 结果={}\n\n", pageNo, pageSize, resMap);
+
+        pageNo = 1000;
+        resMap = mongoUserRepository.queryPage(pageNo, pageSize, "passWord", "xiyou");
+        log.info("---分页查询pageNo={} pageSize={} 结果={}\n\n", pageNo, pageSize, resMap);
+
+        pageNo = 2000;
+        resMap = mongoUserRepository.queryPage(pageNo, pageSize, "passWord", "xiyou");
+        log.info("---分页查询pageNo={} pageSize={} 结果={}\n\n", pageNo, pageSize, resMap);
+    }
 }
