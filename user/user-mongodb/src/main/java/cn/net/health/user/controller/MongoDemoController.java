@@ -101,8 +101,8 @@ public class MongoDemoController {
             e.printStackTrace();
         }
         try {
-            list = mongoUserRepository.queryAll();
-            log.info("---查询所有：{}---", list);
+//            list = mongoUserRepository.queryAll();
+//            log.info("---查询所有：{}---", list);
         } catch (Exception e) {
             e.printStackTrace();
         }
