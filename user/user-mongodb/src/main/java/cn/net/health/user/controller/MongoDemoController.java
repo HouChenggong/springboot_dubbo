@@ -74,8 +74,8 @@ public class MongoDemoController {
         mongoUserRepository.save(mongoUser);
         log.info("-----插入成功-----");
 
-        list = mongoUserRepository.queryAll();
-        log.info("---查询所有：{}---", list);
+//        list = mongoUserRepository.queryAll();
+//        log.info("---查询所有：{}---", list);
     }
 
     @ApiOperation(value = "批量插入", notes = "批量插入")
