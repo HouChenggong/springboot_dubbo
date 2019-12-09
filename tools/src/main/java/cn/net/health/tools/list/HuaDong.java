@@ -16,7 +16,51 @@ public class HuaDong {
     LinkedList<Long> ll = new LinkedList<Long>();
 
     public static void main(String[] args) {
-        test();
+//        test();
+        int arr[] = new int[]{1, 3, 5, 3, 5, 7, 2, 3};
+        int arr2[] = new int[]{1, -2};
+//        System.out.println(maxSlidingWindow(arr,3));
+        System.out.println(maxSlidingWindow(arr2, 1));
+    }
+
+    public static int[] maxSlidingWindow(int[] nums, int k) {
+        if (k == 1) {
+            //如果k=1，直接返回原来的数组
+            return nums;
+        }
+        //数组长度
+        int length = nums.length;
+        //要返回的结果
+        int res[] = new int[length - k + 1];
+        //一些特殊判断
+        if (nums == null || length == 0 || k <= 0 || k > length) {
+            return new int[0];
+        }
+        //初始化
+        int left = 0, right = 0, max = nums[0];
+        //返回结果最大值的索引
+        int num = 0;
+        while (right < nums.length) {
+            //遍历每次滑动的小窗口最大值,因为下面要进行right++,所以right < nums.length - 1，而不是小于nums.length
+            while (right < nums.length - 1 && right - left < k - 1) {
+                right++;
+                if (nums[right] > max) {
+                    max = nums[right];
+                }
+            }
+            res[num] = max;
+            num++;
+            left++;
+            //如果right是最后一位的话，直接返回，因为如果不返回，会有一种情况导致还要重新判断，比如1，7，3，5，3
+            //此时right是最后一位，恰巧7是前面的最大值即将被移除，就会导致重新进行判断
+            if (right == length - 1) break;
+            //如果左边要划掉的值正好是最大值的话，要重新计算窗口中的最大值
+            if (nums[left - 1] == max) {
+                right = left;
+                max = nums[left];
+            }
+        }
+        return res;
 
     }
 
@@ -59,4 +103,5 @@ public class HuaDong {
             System.out.println(r.acquire());
         }
     }
+
 }
