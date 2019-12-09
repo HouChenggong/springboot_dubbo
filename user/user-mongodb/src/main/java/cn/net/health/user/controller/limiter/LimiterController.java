@@ -1,6 +1,7 @@
 package cn.net.health.user.controller.limiter;
 
 
+import cn.net.health.user.config.AnRateLimiter;
 import cn.net.health.user.impl.GuavaRateLimiterService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -8,10 +9,9 @@ import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author xiyou
@@ -53,5 +53,10 @@ public class LimiterController {
 
     }
 
-
+    @ApiOperation(value = "rateLimiter限流", notes = "查询用户")
+    @GetMapping("/index")
+    @AnRateLimiter(permitsPerSecond = 10, timeout = 500, timeunit = TimeUnit.MILLISECONDS, msg = "亲,现在流量过大,请稍后再试.")
+    public String index() {
+        return System.currentTimeMillis() + "";
+    }
 }
