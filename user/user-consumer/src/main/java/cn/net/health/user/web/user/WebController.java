@@ -50,11 +50,7 @@ public class WebController {
         String encodePassword = ShiroKit.md5(password, password);
         if (userBean.getPassWord().equals(encodePassword)) {
             String jwt =JWTUtil.sign(username, encodePassword);
-            redisTemplate.opsForValue().set("jwaat_"+username,jwt,12000L);
             stringRedisTemplate.opsForValue().set("jwt_"+username,jwt,12000L);
-//            cacheService.setCacheToRedis("1234", "撒旦阿松大2232", 6000L);
-//            String re = String.valueOf(cacheService.getCacheByKey("1234"));
-//            System.out.println(re+cacheService.getExpire("1234"));
             return new ResultInfo("200", "Login success",jwt );
         } else {
             throw new UnauthorizedException();
