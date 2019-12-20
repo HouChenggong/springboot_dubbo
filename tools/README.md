@@ -8,3 +8,4 @@
 |[数组最长前缀字符串](https://github.com/HouChenggong/springboot_dubbo/blob/master/tools/src/main/java/cn/net/health/tools/list/ZuiChang.java)||
 |[三数之和](https://github.com/HouChenggong/springboot_dubbo/blob/master/tools/src/main/java/cn/net/health/tools/list/SanShu.java)||
 |[最接近的三数之和](https://github.com/HouChenggong/springboot_dubbo/blob/master/tools/src/main/java/cn/net/health/tools/list/SanShu.java)||
+|[珠算排序算法](https://github.com/HouChenggong/springboot_dubbo/blob/master/tools/src/main/java/cn/net/health/tools/list/ThreadSort.java)||
