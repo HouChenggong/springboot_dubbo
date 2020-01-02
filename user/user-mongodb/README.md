@@ -285,3 +285,43 @@ db.myColl.find( { score: 5, category: "cafe" } )
 
 如果任何索引字段是数组，MongoDB都会自动创建一个多键索引；您无需显式指定多键类型。
 
+
+## 副本集
+1. 一主2从， 主挂掉，两个从节点开始选举，其中之一当主
+2. 一主1从1仲裁者 ，仲裁者不存储数据，只负责投票
+接下来是创建1主2从
+压缩包地址：
+链接：https://pan.baidu.com/s/1y-AVXlpoRHMabJSKnmkI_g 
+提取码：lfa5
+
+1. 启动mongodb.bat 之前确保里面的config是mongodNoAuth.conf ,启动如果想把历史数据删除，删除data里面的数据和mongod.log以及mongod.pid
+2.运行mongodb.bat
+3.在分别测试3个实例是否能被连接
+4. 在主节点一个窗口执行下面的命令，注意_id是mongodNoAuth.conf副本集里面的值
+```sql
+ rsconf = {
+   _id: "cobotWeb",
+   members: [
+     {
+      _id: 0,
+      host: "127.0.0.1:27017"
+     },
+     {
+      _id: 1,
+      host: "127.0.0.1:27018"
+     },
+     {
+      _id: 2,
+      host: "127.0.0.1:27019"
+     }
+    ]
+ }
+rs.initiate(rsconf)
+rs.status()
+db.isMaster()
+插入数据验证一致性
+
+```
+4. 接下来就是
+https://www.cnblogs.com/s6-b/p/11128002.html
+
