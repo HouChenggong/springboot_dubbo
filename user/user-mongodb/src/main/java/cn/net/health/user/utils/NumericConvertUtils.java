@@ -72,7 +72,7 @@ public class NumericConvertUtils {
 
     public static void main(String[] args) {
         SnowFlake snowFlake = new SnowFlake(2, 3);
-        for (int i = 0; i < (1 << 4); i++) {
+        for (int i = 0; i < (1); i++) {
             //10进制
             Long id = snowFlake.makeNextId();
             //62进制
@@ -80,6 +80,14 @@ public class NumericConvertUtils {
 
             //10进制转化为62进制
             System.out.println("10进制：" + id + "  62进制:" + convertedNumStr);
+            System.out.println("10进制：" + id + "  62进制:" + convertedNumStr);
+            System.out.println("82051213721612288".length());
+            String var16 ="507f191e810c19729de860ea";
+            System.out.println(var16.length());
+            Long vae10 =toDecimalNumber(var16,16);
+            System.out.println("10jinzhi "+vae10+"......"+vae10.toString().length());
+            String var62 =toOtherNumberSystem(vae10,64);
+            System.out.println("61jinzhi"+var62+"..........."+var62.length());
 
             //TODO 执行具体的存储操作，可以存放在Redis等中
 
