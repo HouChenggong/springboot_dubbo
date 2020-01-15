@@ -7,7 +7,6 @@ import lombok.extern.slf4j.Slf4j;
  * @author xiyou
  * @version 1.2
  * @date 2020/1/13 11:51
- *
  */
 @Slf4j
 public class Digui {
@@ -68,6 +67,57 @@ public class Digui {
     }
 
     /**
+     * 累加Fib(n+3)=Fib(n)+Fib(n+2)+Fib(n+1)
+     * 斐波那契数列
+     *
+     * @param i
+     * @return
+     */
+    public static int sanFab(int i) {
+        if (i == 1 || i == 2) {
+            return 1;
+        } else if (i == 0) {
+            return 0;
+        } else {
+
+        }
+        return sanFab(i - 3) + sanFab(i - 2) + sanFab(i - 1);
+
+    }
+
+    /**
+     * 累加Fib(n+3)=Fib(n)+Fib(n+2)+Fib(n+1)
+     * 斐波那契数列
+     *
+     * @param i
+     * @return
+     */
+    public static int sanFab2(int i) {
+        if (i == 1) {
+            return i;
+        } else if (i <= 0) {
+            return 0;
+        } else if (i == 2) {
+            return 1;
+        } else {
+
+        }
+        int a0 = 0;
+        int a1 = 1;
+        int a2 = 1;
+        int result = 0;
+
+        for (int n = 3; n <= i; n++) {
+            result = a0 + a1 + a2;
+            a0 = a1;
+            a1 = a2;
+            a2 = result;
+        }
+        return result;
+
+    }
+
+    /**
      * 累加Fib(n)=Fib(n-1)+Fib(n-2)
      * （兔子繁殖问题）斐波那契数列
      *
@@ -120,6 +170,8 @@ public class Digui {
         System.out.println("计算结果：" + chengWithStart(10, 5) + "!");
         log.info("第[{}]]月的兔兔数量是[{}]", 9, fb(9));
         log.info("非递归实现兔子问题，第[{}]]月的兔兔数量是[{}]", 9, fb2(9));
+        log.info("力扣1137. 第[{}]个泰波那契数问题,结果是：[{}]", 25, sanFab(25));
+        log.info("力扣1137. 第[{}]个泰波那契数问题,结果是：[{}]", 25, sanFab2(25));
 
 
     }
