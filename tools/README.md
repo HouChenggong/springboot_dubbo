@@ -14,3 +14,5 @@
 |[力扣19题删除链表第N个节点](https://github.com/HouChenggong/springboot_dubbo/blob/master/tools/src/main/java/cn/net/health/tools/node/ListNodeTest.java)||
 |递归|[兔子问题、累加、累乘的递归解法](https://github.com/HouChenggong/springboot_dubbo/blob/master/user/user-mongodb/src/main/java/cn/net/health/user/test/Digui.java)|
 |递归|[力扣1137，3种解法](https://github.com/HouChenggong/springboot_dubbo/blob/master/tools/src/main/java/cn/net/health/tools/digui/TbNx.java)|
+|细胞分裂|[细胞分裂递归解法](https://github.com/HouChenggong/springboot_dubbo/blob/master/tools/src/main/java/cn/net/health/tools/digui/Cell.java)|
+|汉诺塔问题、反转二叉树（递归和非递归）|[汉诺塔、反转二叉树](https://github.com/HouChenggong/springboot_dubbo/blob/master/tools/src/main/java/cn/net/health/tools/digui/FanZhuanTree.java)|
