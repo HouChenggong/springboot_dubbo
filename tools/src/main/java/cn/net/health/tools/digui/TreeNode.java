@@ -14,7 +14,7 @@ public class TreeNode {
     public TreeNode right;
 
     public TreeNode(int key) {
-        key = value;
+        value = key;
     }
 
 
