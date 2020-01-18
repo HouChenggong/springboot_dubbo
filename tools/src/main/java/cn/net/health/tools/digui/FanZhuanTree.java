@@ -36,6 +36,12 @@ public class FanZhuanTree {
 
     }
 
+    /**
+     * 反转二叉树递归解法
+     *
+     * @param root
+     * @return
+     */
     public static TreeNode invertTree(TreeNode root) {
         if (root == null) {
             return null;
@@ -66,8 +72,17 @@ public class FanZhuanTree {
         getCont(n - 1, temp, from, to);
     }
 
+
+    /**
+     * 反转二叉树非递归解法：用linkedList实现
+     *
+     * @param root
+     * @return
+     */
     public TreeNode invertTree2(TreeNode root) {
-        if (root == null) return null;
+        if (root == null) {
+            return null;
+        }
         LinkedList<TreeNode> queue = new LinkedList<TreeNode>();
         queue.add(root);
         while (!queue.isEmpty()) {
@@ -75,8 +90,12 @@ public class FanZhuanTree {
             TreeNode temp = current.left;
             current.left = current.right;
             current.right = temp;
-            if (current.left != null) queue.add(current.left);
-            if (current.right != null) queue.add(current.right);
+            if (current.left != null) {
+                queue.add(current.left);
+            }
+            if (current.right != null) {
+                queue.add(current.right);
+            }
         }
         return root;
 
