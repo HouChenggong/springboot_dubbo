@@ -8,6 +8,11 @@ import java.nio.charset.Charset;
 
 public class BloomFilterTest {
 
+    /**
+     * todo-xiyou 布隆过滤器
+     *
+     * @param args
+     */
     public static void main(String[] args) {
         BloomFilter<String> stringBloomFilter =
                 BloomFilter.create(Funnels.stringFunnel(Charset.forName("utf-8")), 1000, 0.001);
