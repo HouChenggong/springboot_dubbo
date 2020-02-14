@@ -1,5 +1,7 @@
 package cn.net.health.tools.hh;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.stream.Collectors;
@@ -8,7 +10,10 @@ public class Wan {
 
 
     public static void main(String[] args) {
-        System.out.println(getResult());
+//        System.out.println(getResult());
+        System.out.println(StringUtils.isBlank(""));
+        System.out.println(StringUtils.isBlank("  "));
+        System.out.println(StringUtils.isBlank(null));
     }
 
     /**
