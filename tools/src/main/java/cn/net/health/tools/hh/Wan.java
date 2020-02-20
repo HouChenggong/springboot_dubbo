@@ -14,6 +14,7 @@ public class Wan {
         System.out.println(StringUtils.isBlank(""));
         System.out.println(StringUtils.isBlank("  "));
         System.out.println(StringUtils.isBlank(null));
+
     }
 
     /**
@@ -59,4 +60,5 @@ public class Wan {
                 .collect(Collectors.joining(("❤")));
         return result;
     }
+
 }

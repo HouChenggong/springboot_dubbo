@@ -2,7 +2,6 @@ package cn.net.health.tools.guava;
 
 import com.google.common.collect.HashBasedTable;
 import com.google.common.collect.Table;
-import sun.security.provider.certpath.Vertex;
 
 /**
  * @author xiyou
