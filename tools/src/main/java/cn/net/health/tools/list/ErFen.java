@@ -115,7 +115,6 @@ public class ErFen {
         System.out.println(right_bound(arr, 6));
         int arr2[] = searchRange(arr, 8);
         int arr3[] = searchRange(arr, 6);
-        int arr3[] = searchRange(arr, 6);
         System.out.println(arr2[0] + "..." + arr2[1]);
         System.out.println(arr3[0] + "..." + arr3[1]);
     }
