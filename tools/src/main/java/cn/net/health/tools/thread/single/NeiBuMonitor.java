@@ -29,6 +29,8 @@ public class NeiBuMonitor {
 
     public static void main(String[] args) {
         System.out.println(YOUR_CLASS);
+        System.out.println(NeiBuMonitor.YOUR_CLASS);
+        System.out.println("上面只是获取静态内部类的属性，看看会不会进行类的初始化，发现不会进行初始化");
         System.out.println("内存地址" + getInstance());
         System.out.println("内存地址" + getInstance());
     }

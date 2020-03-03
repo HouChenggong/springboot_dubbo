@@ -23,8 +23,9 @@ public class EHanMonitor {
     }
 
     public static void main(String[] args) {
-
-        System.out.println(yourClass + getClassMonitor());
+        System.out.println(EHanMonitor.yourClass );
+        System.out.println("上面是只调用单例模式的属性，但是也会进行类的初始化");
+        System.out.println(EHanMonitor.yourClass + getClassMonitor());
         System.out.println(EHanMonitor.yourClass + EHanMonitor.getClassMonitor());
     }
 }
