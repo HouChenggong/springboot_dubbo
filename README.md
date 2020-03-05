@@ -175,3 +175,5 @@ public ResultInfo requirePermissionS() {
 [最长回文字符串](https://leetcode-cn.com/problems/longest-palindromic-substring/)| [github代码](https://github.com/HouChenggong/springboot_dubbo/blob/master/tools/src/main/java/cn/net/health/tools/str/LongestPalindrome.java)  | 
 |[Z字形变换](https://leetcode-cn.com/problems/zigzag-conversion/)|[github代码](https://github.com/HouChenggong/springboot_dubbo/commit/2a17b3de081d26386e0160ae0a5a6d6635d74658)|
 |[更多刷题地址...](https://github.com/HouChenggong/springboot_dubbo/tree/master/tools)||
+
+## 7. 设计模式总结

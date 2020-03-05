@@ -1,0 +1,56 @@
+package cn.net.health.tools.design.single.enu;
+
+import java.lang.reflect.Constructor;
+
+/**
+ * @author xiyou
+ * 枚举实现单例模式
+ * 至于为什么枚举能实现单例模式，有兴趣的伙伴可以深度学习一下
+ * SpirngIOC是单例 是枚举的升级，是懒汉模式
+ */
+public enum EnumSingleton {
+
+    /**
+     *
+     */
+    INSTANCE;
+    private Object data;
+
+    private Object getData() {
+        return data;
+    }
+
+    private void setData(Object data) {
+        this.data = data;
+    }
+
+    private static EnumSingleton getInstance() {
+        return INSTANCE;
+    }
+
+
+    public static void main(String[] args) {
+        /**
+         *         System.out.println(EnumSingleton.getInstance());
+         *         System.out.println(EnumSingleton.getInstance());
+         *         System.out.println(EnumSingleton.getInstance());
+         *         System.out.println(EnumSingleton.getInstance());
+         */
+        Object instance = EnumSingleton.getInstance();
+        System.out.println(instance);
+        //通过非正常手段，反射来破坏单例
+        Class<?> oneClass = EnumSingleton.class;
+        try {
+            Constructor c = oneClass.getDeclaredConstructor(String.class, int.class);
+            c.setAccessible(true);
+            Object instance1 = c.newInstance("xiyou", 666);
+            Object instance2 = c.newInstance("xiyou2", 6662);
+            System.out.println(instance1);
+            System.out.println(instance2);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}
+
+

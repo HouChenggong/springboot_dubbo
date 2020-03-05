@@ -8,7 +8,7 @@ public class ExecutorThread implements Runnable {
 
     @Override
     public void run() {
-        SimpleLazyMonitor instance = SimpleLazyMonitor.getMonitor();
+        SimpleLazySingleton instance = SimpleLazySingleton.getMonitor();
         System.out.println(Thread.currentThread().getName() + ":" + instance);
     }
 }
