@@ -177,3 +177,6 @@ public ResultInfo requirePermissionS() {
 |[更多刷题地址...](https://github.com/HouChenggong/springboot_dubbo/tree/master/tools)||
 
 ## 7. 设计模式总结
+|设计模式| 地址 |
+|--|--|
+|[6大类型单例模式](https://blog.csdn.net/qq_39455116/article/details/82936637)||
