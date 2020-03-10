@@ -110,9 +110,23 @@ public class VolatileTest {
 
 #### 2.2 禁止指令重排序
 
+指令可以重排序的地方：new Object()版初始化重排序
 
+int a =7;int b =4;
+
+int c=a+b ,取ab值的时候，可以先取b再取a
+
+​                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
 
 #### 2.3 但是不能保证原子性，所以不能++
 
 
+
+## 3. 在32虚拟机 long double不是原子性的
+
+但是在32位的操作系统中，加volatile可以保证long 和double的原子性，其实没有意义
+
+
+
+## 4. volatile真正用途——布尔值
 
