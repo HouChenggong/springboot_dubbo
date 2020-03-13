@@ -1,5 +1,8 @@
 package cn.net.health.tools.str;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class StrIn {
     public static int strStr(String haystack, String needle) {
         int result = -1;
@@ -32,5 +35,32 @@ public class StrIn {
         }
         return result;
     }
+    /**
+     * 辗转相除法的递归调用求两个数的最大公约数
+     * @param x 其中一个数
+     * @param y 其中另一个数
+     * @return 递归调用，最终返回最大公约数
+     */
+    public static int gcd(int x, int y) {
+        return y == 0 ? x : gcd(y , x % y);
+    }
+    /**
+     * 求n个数的最大公约数
+     * @param z 数据个数
+     * @return 递归调用，最终返回最大公约数
+     */
+    public static int ngcd(List<Integer> target , int z) {
+        if(z == 1) {
+            return target.get(0);//真正返回的最大公约数
+        }
+        //递归调用，两个数两个数的求
+        return gcd(target.get(z - 1) , ngcd(target , z - 1));
+    }
+
+    public static void main(String[] args) {
+        List<Integer > arr = Arrays.asList( 10,4,6);
+        System.out.println(ngcd(arr,3));
+    }
+
 
 }
