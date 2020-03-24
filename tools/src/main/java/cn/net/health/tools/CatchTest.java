@@ -252,6 +252,25 @@ public class CatchTest {
 
     }
 
+    public static String try33() {
+        String t = "1";
+        System.out.println("刚开始是：" + t);
+        try {
+            t = "try2";
+            Integer.parseInt(null);
+            System.out.println("执行try方法结果：" + t);
+
+            return t;
+        } catch (Exception e) {
+            e.printStackTrace();
+            t = "catch3";
+            System.out.println("执行catch方法结果：" + t);
+            return t;
+        }
+
+    }
+
+
     /**
      * 结论：
      * 1. try、catch、finally语句中，在如果try语句有return语句，则返回的之后当前try中变量此时对应的值，此后对变量做任何的修改，都不影响try中return的返回值
@@ -265,24 +284,25 @@ public class CatchTest {
      * @param args
      */
     public static void main(String[] args) {
-        System.out.println("1------------------------------");
-        System.out.println("最后结果是：" + try1());
-        System.out.println("2------------------------------");
-        System.out.println("最后结果是：" + try2());
-        System.out.println("3------------------------------");
-        System.out.println("最后结果是：" + try3());
-        System.out.println("4------------------------------");
-        System.out.println("最后结果是：" + try4());
-        System.out.println("5------------------------------");
-//        System.out.println("最后结果是：" + try5());
-        System.out.println("6------------------------------");
-        System.out.println("最后结果是：" + try6());
-        System.out.println("7------------------------------");
-//        System.out.println("最后结果是：" + try7());
-        System.out.println("8------------------------------");
-        System.out.println("最后结果是：" + try8());
-        System.out.println("9------------------------------");
-        System.out.println("最后结果是：" + try9());
+//        System.out.println("1------------------------------");
+//        System.out.println("最后结果是：" + try1());
+//        System.out.println("2------------------------------");
+//        System.out.println("最后结果是：" + try2());
+//        System.out.println("3------------------------------");
+//        System.out.println("最后结果是：" + try3());
+//        System.out.println("4------------------------------");
+//        System.out.println("最后结果是：" + try4());
+//        System.out.println("5------------------------------");
+////        System.out.println("最后结果是：" + try5());
+//        System.out.println("6------------------------------");
+//        System.out.println("最后结果是：" + try6());
+//        System.out.println("7------------------------------");
+////        System.out.println("最后结果是：" + try7());
+//        System.out.println("8------------------------------");
+//        System.out.println("最后结果是：" + try8());
+//        System.out.println("9------------------------------");
+//        System.out.println("最后结果是：" + try9());
+        System.out.println("最后结果是：" + try33());
     }
 
 }
