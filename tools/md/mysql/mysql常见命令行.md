@@ -1,0 +1,6 @@
+- 查询当前活跃的事务
+
+```sql
+SELECT * FROM INFORMATION_SCHEMA.INNODB_TRX
+```
+
