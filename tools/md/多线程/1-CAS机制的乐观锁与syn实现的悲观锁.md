@@ -63,11 +63,28 @@ public final int getAndAddInt(Object o, long offset, int delta) {
 
 举个栗子：现在我们去要求操作数据库，根据CAS的原则我们本来只需要查询原本的值就好了，现在我们一同查出他的标志位版本字段vision。
 
+如果采用乐观锁更新，普通的更新如下，
+
+- 普通CAS更新，但是会出现ABA问题，详情请查看CAS讲解
+
 ```sql
-update table set value = newValue where value = #{oldValue}
+update table set value = newValue where  and id =XXX and value = #{oldValue}
 //oldValue就是我们执行前查询出来的值
-update table set value = newValue ，vision = vision + 1 where value = #{oldValue} and vision = #{vision} 
+```
+
+- 带版本号的更新方式，但是更新成功率会很低
+
+```sql
+update table set value = newValue ，vision = vision + 1 where id =XXX and
+value = #{oldValue} and vision = #{vision} 
 // 判断原来的值和版本号是否匹配，中间有别的线程修改，值可能相等，但是版本号100%不一样
+```
+
+- 针对秒杀的可以进一步优化：
+  - 因为秒杀系统，库存都是依次递减的，所以不需要有版本号标识
+
+```sql
+update table set value = oldValue -1 where  and id =XXX and value = #{oldValue}
 ```
 
 ## 2. 悲观锁
