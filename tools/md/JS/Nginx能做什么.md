@@ -377,9 +377,25 @@ keepalive提供的是虚拟IP  192.168.1.100，因为192.168.1.100不存在，�
 
 # 6. NGINX解决跨域问题
 
+## 7. NGINX限流
+
+- [Nginx限流](https://mp.weixin.qq.com/s/vyQZvJm5sjnEnrpi1siP2A)
+
+1. `nginx http配置：`
+2. `    #请求数量控制，每秒20个`
+3. `    limit_req_zone $binary_remote_addr zone=one:10m rate=20r/s;`
+4. `    #并发限制30个`
+5. `    limit_conn_zone $binary_remote_addr zone=addr:10m;`
+6. 
+7. `    server块配置`
+8. `    limit_req zone=one burst=5;`
+9. `    limit_conn addr 30;`
 
 
-# 7 总结
+
+
+
+# 8 总结
 
 - **正向代理隐藏了真实的客户端**。
 - **反向代理隐藏了真实的服务器**。
