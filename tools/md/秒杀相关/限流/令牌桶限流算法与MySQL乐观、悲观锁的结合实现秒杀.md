@@ -98,9 +98,31 @@ update table set value = oldValue -1 where  and id =XXX and value = #{oldValue}
     }
 ```
 
-所以我们用乐观锁的时候，如果配合限流，可以不用事务
+- 核心乐观锁更新代码
+
+```sql
+  <update id="updateByOptimistic" parameterType="cn.monitor4all.miaoshadao.dao.Stock">
+    update stock
+    <set>
+      sale = sale + 1,
+    </set>
+    WHERE id = #{id,jdbcType=INTEGER}
+    AND sale = #{sale,jdbcType=INTEGER}
+  </update>
+```
 
 
+
+所以我们用乐观锁的时候，如果配合限流，可以不用事务，但是真实的场景是秒杀成功之后要下单，要发短信或者邮件等一些列操作，所以还是要有事务的，鉴于现在的下单比较简单，所以没有用事务
+
+- 问题：上述的乐观锁更新代码的Mapper层面**updateByOptimistic**这个会有很大问题，就是假如有100个人都校验库存有剩余，然后剩余库存都是50个，然后这50个人用**updateByOptimistic**乐观锁更新，但是最后只有一个人会成功，所以成功率极低，那么你就会说能不能用下面的判断条件
+
+```sql
+    WHERE id = #{id,jdbcType=INTEGER}
+    AND sale >0
+```
+
+可以用，但是用了就不是MVCC乐观锁了
 
 ### 2. 悲观锁
 
