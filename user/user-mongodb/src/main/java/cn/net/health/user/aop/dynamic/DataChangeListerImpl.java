@@ -15,6 +15,9 @@ public class DataChangeListerImpl implements DataChangeListener {
 
     @Override
     public String sayHello(String name) {
+        if (name == null) {
+            throw new RuntimeException("param is null");
+        }
         return name + System.currentTimeMillis();
     }
 
