@@ -7,7 +7,13 @@
 顶层接口A
 
 ```java
-
+/**
+ * @author xiyou
+ * JDK动态代理
+ */
+public interface DataChangeListener {
+ public void sayHello(String name)；
+}
 ```
 
 二层接口A2实现了A的方法
@@ -111,11 +117,7 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Slf4j
 public class DataChangeListerImpl implements DataChangeListener {
-    @Override
-    public void listener(Object obj) {
-        log.info("user update data={}", obj.toString());
-    }
-
+ 
     @Override
     public String sayHello(String name) {
         return name + System.currentTimeMillis();
@@ -269,7 +271,9 @@ Java 动态代理，具体有如下四步骤：
 - 通过为 Proxy 类指定 ClassLoader 对象和一组 interface 来创建动态代理类；
   - 步骤就是：写一个接口A和A的实现类AImpl  然后获取它的ClassLoader 和Interface
 - 通过反射机制获得动态代理类的构造函数，其唯一参数类型是调用处理器接口类型；
+  - 因为有类并不一定有实例，所以要反射获取构造函数
 - 通过构造函数创建动态代理类实例，构造时调用处理器对象作为参数被传入。
+  - 有了构造函数就能创建实例
 
 ### 获取proxy0.class
 

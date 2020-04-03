@@ -190,5 +190,7 @@ https://mp.weixin.qq.com/s/i5QLxas3h8XauA3HvW9f8w
 此外令牌桶限流算法，其实上述有些麻烦，如果想在N个接口都是用推荐用
 
 - [AOP+注解+令牌桶实现指定接口限流](https://mp.weixin.qq.com/s/vyQZvJm5sjnEnrpi1siP2A)
-- 
+- AOP+注解+令牌桶实现通用接口限流
+
+  - 而且是不同接口对限流的速率不一样
 
