@@ -34,6 +34,8 @@ class Service3 {
     public void process() {
         User user = UserContextHolder.holder.get();
         System.out.println("Service3拿到用户名: " + user.name);
+        //手动释放内存，从而避免内存泄漏
+        UserContextHolder.holder.remove();
     }
 }
 

@@ -14,9 +14,9 @@ public class ThreadLocalDateTest2 {
     public static SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 
     public static void main(String[] args) throws InterruptedException {
-//        method1();
+        method1();
 //        method2();
-        method3();
+//        method3();
     }
 
     /**
