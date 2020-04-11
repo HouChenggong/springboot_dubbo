@@ -1,6 +1,16 @@
 ## spring事务
 
+事务的本质
+
+1. 获取连接 Connection con = DriverManager.getConnection()
+2. 开启事务con.setAutoCommit(true/false);
+3. 执行CRUD
+4. 提交事务/回滚事务 con.commit() / con.rollback();
+5. 关闭连接 conn.close();
+
 ## 1. @Transactional注解
+
+船惹可信Nou
 
 注解的源码：
 
@@ -92,12 +102,48 @@ public @interface Transactional {
 `propagation` 代表事务的传播行为，默认值为 `Propagation.REQUIRED`，其他的属性信息如下：
 
 - `Propagation.REQUIRED`：如果当前存在事务，则加入该事务，如果当前不存在事务，则创建一个新的事务。**(** 也就是说如果A方法和B方法都添加了注解，在默认传播模式下，A方法内部调用B方法，会把两个方法的事务合并为一个事务 **）**
+
+  - 即只要大方法里面有事务，小方法即使没有事务，也会用大事务的
+    说明都在沿用当前存在的事务，
+  - 如果大方法有事务，但是小方法也有，它的意思是我承认小方法你有自己的事务
+  - 如果大方法没有事务，调用的小方法里面有，则小方法自己的事务自己会回滚，但是不影响大方法的执行，也就是大方法没有事务
+  - 总结：就是它承认它内部的方法有用事务，如果内部的方法有自己的事务，则内部的方法就用自己内部的事务。如果内部的方法没有事务，则沿用当前事务。如果外部的方法没有事务，则不管内部的方法有没有事务，外部的方法都不会有事务。也就是它只承认内部的，但是不承认外部的
+
 - `Propagation.SUPPORTS`：如果当前存在事务，则加入该事务；如果当前不存在事务，则以非事务的方式继续运行。
+
+  - 假设ServiceB.methodB() 的事务级别为 PROPAGATION_SUPPORTS，那么当执行到ServiceB.methodB()时，如果发现ServiceA.methodA()已经开启了一个事务，则加入当前的事务，如果发现ServiceA.methodA()没有开启事务，则自己也不开启事务。这种时候，内部方法的事务性完全依赖于最外层的事务。
+
 - `Propagation.MANDATORY`：如果当前存在事务，则加入该事务；如果当前不存在事务，则抛出异常。
+
 - `Propagation.REQUIRES_NEW`：重新创建一个新的事务，如果当前存在事务，暂停当前的事务。**(** 当类A中的 a 方法用默认`Propagation.REQUIRED`模式，类B中的 b方法加上采用 `Propagation.REQUIRES_NEW`模式，然后在 a 方法中调用 b方法操作数据库，然而 a方法抛出异常后，b方法并没有进行回滚，因为`Propagation.REQUIRES_NEW`会暂停 a方法的事务 **)**
+
+  - 用于子方法
+  - 无论当前事务是否存在，都会创建新事物运行方法
+    这样新事务就会拥有新的锁和新的事务隔离级别，与当前事务互相独立
+  - 新建事务，如果当前存在事务，把当前事务挂起。新建的事务将和被挂起的事务没有任何关系，是两个独立的事务，外层事务失败回滚之后，不能回滚内层事务执行的结果，内层事务失败抛出异常，外层事务捕获，也可以不处理回滚操作
+
 - `Propagation.NOT_SUPPORTED`：以非事务的方式运行，如果当前存在事务，暂停当前的事务。
+
 - `Propagation.NEVER`：以非事务的方式运行，如果当前存在事务，则抛出异常。
+
 - `Propagation.NESTED` ：和 Propagation.REQUIRED 效果一样。
+
+  - 但是NESTED一般用于子方法，所以又不太一样
+
+  - 在当前方法调用子方法时，如果子方法发生异常，并且被捕获的情况下
+    只回滚子方法执行的SQL，而不回滚当前方法执行的事务
+
+
+
+```java
+比如我们设计 ServiceA.methodA() 的事务级别为 PROPAGATION_REQUIRED，ServiceB.methodB() 的事务级别为 PROPAGATION_REQUIRES_NEW。
+
+那么当执行到 ServiceB.methodB() 的时候，ServiceA.methodA() 所在的事务就会挂起，ServiceB.methodB() 会起一个新的事务，等待 ServiceB.methodB() 的事务完成以后，它才继续执行。
+
+他与 PROPAGATION_REQUIRED 的事务区别在于事务的回滚程度了。因为 ServiceB.methodB() 是新起一个事务，那么就是存在两个不同的事务。如果 ServiceB.methodB() 已经提交，那么 ServiceA.methodA() 失败回滚，ServiceB.methodB() 是不会回滚的。如果 ServiceB.methodB() 失败回滚，如果他抛出的异常被 ServiceA.methodA() 捕获，ServiceA.methodA() 事务仍然可能提交(主要看B抛出的异常是不是A会回滚的异常)。
+```
+
+
 
 ### 1.3 timeout
 
