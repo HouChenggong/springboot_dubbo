@@ -219,5 +219,157 @@ JVM也会往虚拟机栈栈中压入一个栈，即为myTest()栈帧或者myTest
 
    - 方式二：涉及到的类都去实现序列化接口
 
-
 [详细解读](<https://blog.csdn.net/qq_39455116/article/details/82886328>)
+
+###  8. switch 对于string的支持
+
+- **switch对int的判断是直接比较整数的值**
+- 对char类型进行比较的时候，实际上比较的是ascii码，编译器会把char型变量转换成对应的int型变量
+- 原来字符串的switch是通过`equals()`和`hashCode()`方法来实现的。。**记住，switch中只能使用整型**
+
+**其实switch只支持一种数据类型，那就是整型，其他数据类型都是转换成整型之后在使用switch的。**
+
+### 9. 快速失败、快速安全
+
+- fail fast 
+
+其实就是如果遇到错误，直接返回失败
+
+```java
+public int divide(int divisor,int dividend){
+    if(dividend == 0){
+        throw new RuntimeException("dividend can't be null");
+    }
+    return divisor/dividend;
+}
+```
+
+- 集和中的快速失败
+
+在Java中， 如果在foreach 循环里对某些集合元素进行元素的 remove/add 操作的时候，就会触发fail-fast机制，进而抛出CMException。
+
+```java
+ List<String> userNames = new ArrayList<String>() {{
+            add("Hollis");
+            add("hollis");
+            add("HollisChuang");
+            add("H");
+        }};
+
+        for (String userName : userNames) {
+            if (userName.equals("Hollis")) {
+                userNames.remove(userName);
+            }
+        }
+
+        System.out.println(userNames);
+//Exception in thread "main" java.util.ConcurrentModificationException
+```
+
+简单总结一下，之所以会抛出CMException异常，是因为我们的代码中使用了增强for循环，而在增强for循环中，集合遍历是通过iterator进行的，但是元素的add/remove却是直接使用的集合类自己的方法。这就导致iterator在遍历的时候，会发现有一个元素在自己不知不觉的情况下就被删除/添加了，就会抛出一个异常，用来提示用户，可能发生了并发修改！
+
+所以，在使用Java的集合类的时候，如果发生CMException，优先考虑fail-fast有关的情况，实际上这里并没有真的发生并发，只是Iterator使用了fail-fast的保护机制，只要他发现有某一次修改是未经过自己进行的，那么就会抛出异常。
+
+- 为什么阿里巴巴禁止在 foreach 循环里进行元素的 remove/add 操作
+
+
+
+- fail safe
+
+为了避免触发fail-fast机制，导致异常，我们可以使用Java中提供的一些采用了fail-safe机制的集合类。
+
+这样的集合容器在遍历时不是直接在集合内容上访问的，而是先复制原有集合内容，在拷贝的集合上进行遍历。
+
+java.util.concurrent包下的容器都是fail-safe的，可以在多线程下并发使用，并发修改。同时也可以在foreach中进行add/remove 。
+
+```java
+public static void main(String[] args) {
+    List<String> userNames = new CopyOnWriteArrayList<String>() {{
+        add("Hollis");
+        add("hollis");
+        add("HollisChuang");
+        add("H");
+    }};
+
+    userNames.iterator();
+
+    for (String userName : userNames) {
+        if (userName.equals("Hollis")) {
+            userNames.remove(userName);
+        }
+    }
+
+    System.out.println(userNames);
+}
+
+```
+
+以上代码，使用CopyOnWriteArrayList代替了ArrayList，就不会发生异常。
+
+fail-safe集合的所有对集合的修改都是先拷贝一份副本，然后在副本集合上进行的，并不是直接对原集合进行修改。并且这些修改方法，如add/remove都是通过加锁来控制并发的。
+
+- copyOnWrite思想
+
+**CopyOnWrite容器是一种读写分离的思想，读和写不同的容器。**
+
+opyOnWriteArrayList中add/remove等写方法是需要加锁的，目的是为了避免Copy出N个副本出来，导致并发写
+
+
+
+### 10 枚举
+
+一个普通的枚举
+
+```java
+public enum t {
+    SPRING,SUMMER;
+}
+```
+
+反编译后的结果：当我们使用enmu来定义一个枚举类型的时候，编译器会自动帮我们创建一个final类型的类继承Enum类，所以枚举类型不能被继承。
+
+```java
+public final class T extends Enum
+```
+
+- 枚举为啥线程安全
+
+```java
+        public static final T SPRING;
+        public static final T SUMMER;
+
+        private static final T ENUM$VALUES[];
+        static
+        {
+            SPRING = new T("SPRING", 0);
+            SUMMER = new T("SUMMER", 1);
+            ENUM$VALUES = (new T[] {
+                SPRING, SUMMER
+            });
+        }
+
+```
+
+
+
+- 枚举序列化线程安全的原因：
+
+当我们使用`enum`来定义一个枚举类型的时候，编译器会自动帮我们创建一个final类型的类继承Enum类,所以枚举类型不能被继承，我们看到这个类中有几个属性和方法。
+
+我们可以看到：都是static类型的，因为static类型的属性会在类被加载之后被初始化，我们在[深度分析Java的ClassLoader机制（源码级别）](https://hollischuang.github.io/archives/199)和[Java类的加载、链接和初始化](https://hollischuang.github.io/archives/201)两个文章中分别介绍过，当一个Java类第一次被真正使用到的时候静态资源被初始化、Java类的加载和初始化过程都是线程安全的。所以， 创建一个enum类型是线程安全的 。
+
+- 枚举序列化线程安全的原因
+
+普通的Java类的反序列化过程中，会通过反射调用类的默认构造函数来初始化对象。所以，即使单例中构造函数是私有的，也会被反射给破坏掉。由于反序列化后的对象是重新new出来的，所以这就破坏了单例。
+
+但是，枚举的反序列化并不是通过反射实现的。所以，也就不会发生由于反序列化导致的单例破坏问题。
+
+why: 为了保证枚举类型像Java规范中所说的那样，每一个枚举类型极其定义的枚举变量在JVM中都是唯一的，在枚举类型的序列化和反序列化上，Java做了特殊的规定 
+
+在序列化的时候Java仅仅是将枚举对象的name属性输出到结果中，反序列化的时候则是通过java.lang.Enum的valueOf方法来根据名字查找枚举对象。同时，编译器是不允许任何对这种序列化机制的定制的，因此禁用了writeObject、readObject、readObjectNoData、writeReplace和readResolve等方法。 
+
+- 枚举比较
+
+java 枚举值比较用 == 和 equals 方法没啥区别，两个随便用都是一样的效果。
+
+因为枚举 Enum 类的 equals 方法默认实现就是通过 == 来比较的；
