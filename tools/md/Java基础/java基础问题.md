@@ -373,3 +373,116 @@ why: 为了保证枚举类型像Java规范中所说的那样，每一个枚举�
 java 枚举值比较用 == 和 equals 方法没啥区别，两个随便用都是一样的效果。
 
 因为枚举 Enum 类的 equals 方法默认实现就是通过 == 来比较的；
+
+### 11 反射破坏单例的原因
+
+通过反射获得单例类的构造函数，由于该构造函数是private的，通过setAccessible(true)指示反射的对象在使用时应该取消 Java 语言访问检查,使得私有的构造函数能够被访问，这样使得单例模式失效。
+
+### 12 序列化破坏单例以及阻止序列化破坏单例
+
+列化会通过反射调用无参数的构造方法创建一个新的对象。
+
+- 如何阻止序列化破坏单例,添加下面的方法
+
+```java
+    private Object readResolve() {
+        return singleton;
+    }
+```
+
+- 为什么能阻止
+
+但是为啥用了readResolve方法就能是单例了，因为在创建的时候，序列化方法做了一层判断，回去判断是否是readResolve，也就是生成策略会发生变化
+
+- 写了readResolve方法的单例能阻止反射破坏单例吗
+
+不能，因为写了readResolve方法，也只是在序列化的时候动态的判断了一下，并不能阻止反射破坏单例模式
+
+### 13 注解与自定义注解
+
+注解4要素
+
+@Documented –注解是否将包含在JavaDoc中
+
+@Retention –什么时候使用该注解
+
+@Target? –注解用于什么地方
+
+@Inherited – 是否允许子类继承该注解
+
+- 自定义注解
+
+比如接口限流使用令牌桶算法+aop+自定义注解
+
+比如接口防止重复提交用redis+token+aop+自定义注解
+
+- 常用注解
+
+### 14 泛型与类型擦除
+
+- 什么是泛型
+
+就是声明的时候指定具体的类型，泛型最⼤的好处是可以提⾼代码的复⽤性。 以List接⼜为例，我们可以将String、 Integer等类型放⼊List中， 如不⽤泛型， 存放String类型要写⼀个List接口， 存放Integer要写另外⼀个List接口， 泛型可以很好的解决这个问题。
+
+- 什么是类型擦除
+
+擦除的主要过程如下： 
+
+1. 将所有的泛型参数用其最左边界（最顶级的父类型）类型替换
+
+2. 移除所有的类型参数。
+3. 其实就是将泛型java代码转换为普通java代码，只不过编译器更直接点，将泛型java代码直接转换成普通java字节码
+4. 也就是说Java中的泛型，只在编译阶段有效。在编译过程中，正确检验泛型结果后，会将泛型的相关信息擦出，并且在对象进入和离开方法的边界处添加类型检查和类型转换的方法。也就是说，泛型信息不会进入到运行时阶段。
+
+比如下面的代码
+
+```java
+public static void main(String[] args) {  
+    Map<String, String> map = new HashMap<String, String>();  
+    map.put("name", "hollis");  
+    map.put("age", "22");  
+    System.out.println(map.get("name"));  
+    System.out.println(map.get("age"));  
+}  
+
+```
+
+反编译后的代码
+
+执行命令 javac XX.java 然后查看class文件即可
+
+```java
+public static void main(String[] args) {  
+    Map map = new HashMap();  
+    map.put("name", "hollis");  
+    map.put("age", "22"); 
+    System.out.println((String) map.get("name"));  
+    System.out.println((String) map.get("age"));  
+}  
+
+```
+
+? 通配符类型 无边界的通配符(Unbounded Wildcards), 就是<?>, 比如List<?>
+　　     无边界的通配符的主要作用就是让泛型能够接受未知类型的数据. 
+<? extends T> 表示类型的上界，表示参数化类型的可能是T 或是 T的子类
+<? super T> 表示类型下界（Java Core中叫超类型限定），
+​	表示参数化类型是此类型的超类型（父类型），直至Object
+注意： 你可以为一个泛型指定上边界或下边界, 但是不能同时指定上下边界.
+
+####  泛型中K T V E ？ object等的含义
+
+E - Element (在集合中使用，因为集合中存放的是元素)
+
+T - Type（Java 类）
+
+K - Key（键）
+
+V - Value（值）
+
+N - Number（数值类型）
+
+？ - 表示不确定的java类型（无限制通配符类型）
+
+S、U、V - 2nd、3rd、4th types
+
+Object - 是所有类的根类，任何类的对象都可以设置给该Object引用变量，使用的时候可能需要类型强制转换，但是用使用了泛型T、E等这些标识符后，在实际用之前类型就已经确定了，不需要再进行类型强制转换。
