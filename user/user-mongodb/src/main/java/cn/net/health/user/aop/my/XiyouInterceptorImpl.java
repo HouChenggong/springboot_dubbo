@@ -1,6 +1,7 @@
 package cn.net.health.user.aop.my;
 
 import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 
 /**
  * @author xiyou
@@ -19,9 +20,9 @@ public class XiyouInterceptorImpl implements XiyouInterceptor {
     }
 
     @Override
-    public Object around(XiyouInvocation invocation) throws InvocationTargetException, IllegalAccessException {
+    public Object around(Object[] params, Method method, Object target) throws InvocationTargetException, IllegalAccessException {
         System.out.println("around before ..........");
-        Object o = invocation.proceed();
+        Object o = method.invoke(target, params);
         System.out.println("around after ..........");
         return o;
     }

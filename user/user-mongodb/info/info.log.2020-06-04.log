@@ -1,0 +1,14 @@
+2020-06-04 00:26:30.420 [main] INFO  c.net.health.user.aop.dynamic.DataChangeListerImpl - xiyou1591201590408
+2020-06-04 00:26:30.425 [main] INFO  c.net.health.user.aop.dynamic.DataChangeListerImpl - user update data=java.lang.Object@124c278f
+2020-06-04 00:26:50.387 [main] INFO  c.net.health.user.aop.dynamic.DataChangeListerImpl - xiyou1591201610379
+2020-06-04 00:26:50.389 [main] INFO  c.net.health.user.aop.dynamic.DataChangeListerImpl - user update data=java.lang.Object@4c1d9d4b
+2020-06-04 00:37:12.809 [main] INFO  c.net.health.user.aop.dynamic.DataChangeListerImpl - xiyou1591202232800
+2020-06-04 00:37:12.811 [main] INFO  c.net.health.user.aop.dynamic.DataChangeListerImpl - user update data=java.lang.Object@124c278f
+2020-06-04 19:33:10.251 [main] INFO  c.net.health.user.aop.dynamic.DataChangeListerImpl - 11111111111111ll1591270390243
+2020-06-04 19:33:10.268 [main] INFO  c.net.health.user.aop.dynamic.DataChangeListerImpl - xiyou1591270390268
+2020-06-04 19:33:10.269 [main] INFO  c.net.health.user.aop.dynamic.DataChangeListerImpl - null1591270390269
+2020-06-04 19:33:39.519 [main] INFO  c.net.health.user.aop.dynamic.DataChangeListerImpl - 11111111111111ll1591270419510
+2020-06-04 19:40:43.181 [main] INFO  c.net.health.user.aop.dynamic.DataChangeListerImpl - 11111111111111ll1591270843173
+2020-06-04 19:42:57.158 [main] INFO  c.net.health.user.aop.dynamic.DataChangeListerImpl - 11111111111111ll1591270977150
+2020-06-04 20:53:38.652 [main] INFO  c.net.health.user.aop.dynamic.DataChangeListerImpl - 11111111111111ll1591275218643
+2020-06-04 20:53:54.392 [main] INFO  c.net.health.user.aop.dynamic.DataChangeListerImpl - 11111111111111ll1591275234382

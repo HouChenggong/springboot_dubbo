@@ -9,16 +9,14 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class DataChangeListerImpl implements DataChangeListener {
     @Override
+    public String sayHello(String name) {
+        name=name + System.currentTimeMillis();
+        log.info(name);
+        return name;
+    }
+    @Override
     public void listener(Object obj) {
         log.info("user update data={}", obj.toString());
-    }
-
-    @Override
-    public String sayHello(String name) {
-        if (name == null) {
-            throw new RuntimeException("param is null");
-        }
-        return name + System.currentTimeMillis();
     }
 
     @Override

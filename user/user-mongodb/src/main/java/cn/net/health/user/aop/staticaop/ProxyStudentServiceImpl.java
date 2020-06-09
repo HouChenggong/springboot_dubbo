@@ -24,6 +24,8 @@ public class ProxyStudentServiceImpl implements PersionService {
     public static void main(String[] args) {
 
         ProxyStudentServiceImpl proxy = new ProxyStudentServiceImpl(new StudentServiceImpl());
+        ProxyStudentServiceImpl proxy2 = new ProxyStudentServiceImpl(new Student2ServiceImpl());
         proxy.sayHello("xiyou");
+        proxy2.sayHello("111111xiyou");
     }
 }

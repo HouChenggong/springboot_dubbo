@@ -27,6 +27,8 @@ public class SerializableTest {
         ObjectInputStream ois = new ObjectInputStream(new FileInputStream(new File("D:\\serialable.txt")));
         Xiyou ny = (Xiyou) ois.readObject();
         System.out.println("NY 对象反序列化成功");
+        Object o;
+        String al;
         return ny;
     }
 }

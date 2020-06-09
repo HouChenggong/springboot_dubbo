@@ -17,9 +17,9 @@ public class TestCountDownLatch {
     Thread thread = new Thread(new Runnable() {
         @Override
         public void run() {
-            System.out.println("线程" + Thread.currentThread().getId() + "额外的订单");
+            System.out.println("线程" + Thread.currentThread().getId() + "先执行一次");
             latch.countDown();
-            System.out.println("线程" + Thread.currentThread().getId() + "剩余数量" + latch.getCount());
+            System.out.println("线程" + Thread.currentThread().getId() + "先执行一次结束，剩余" + latch.getCount());
 
         }
     });
@@ -51,7 +51,7 @@ public class TestCountDownLatch {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        System.out.println("10个线程已执行完毕");
+        System.out.println("11个线程已执行完毕");
     }
 
     public static void main(String[] args) {

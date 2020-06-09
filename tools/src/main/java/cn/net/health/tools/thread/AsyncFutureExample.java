@@ -11,19 +11,20 @@ import java.util.concurrent.*;
  */
 public class AsyncFutureExample {
 
-    private final static int avaliableProcessors = Runtime.getRuntime().availableProcessors();
+//    private final static int avaliableProcessors = Runtime.getRuntime().availableProcessors();
     private final static ThreadPoolExecutor pool = new ThreadPoolExecutor
-            (avaliableProcessors, avaliableProcessors * 2,
-                    1, TimeUnit.MINUTES, new LinkedBlockingQueue<>(5)
+            (2, 3,
+                    1, TimeUnit.MINUTES, new LinkedBlockingQueue<>(10)
                     , new ThreadPoolExecutor.CallerRunsPolicy());
 
     public static String doSomethingA() {
+        System.out.println("Astart.............");
         try {
-            Thread.sleep(2000);
+            Thread.sleep(20000);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        System.out.println("A.............");
+        System.out.println("A.end............");
         return "TaskA....Result";
     }
 
@@ -51,34 +52,13 @@ public class AsyncFutureExample {
     }
 
     public static void main(String[] args) throws Exception {
-        long start = System.currentTimeMillis();
-        // 1.创建future任务
-        FutureTask<String> futureTask = new FutureTask<>(() -> {
-            String result = null;
-            try {
-                result = doSomethingA();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            return result;
-        });
-//        // 2.开启异步单元执行任务A
-//        Thread thread = new Thread(futureTask, "threadA");
-//        thread.start();
-
-        pool.execute(futureTask);
-
-        // 3.执行任务B
-        String taskB = doSomethingB();
-
-        // 4.同步等待线程A运行结束
-        String resultA = futureTask.get();
-
-        //5.打印两个任务执行结果
-        System.out.println(resultA + "  " + taskB);
-        System.out.println(System.currentTimeMillis() - start);
-        System.out.println(avaliableProcessors);
-        delay();
-        cycle();
+        for(int i=0;i<10;i++){
+            pool.execute(new Runnable() {
+                @Override
+                public void run() {
+                    doSomethingA();
+                }
+            });
+        }
     }
 }

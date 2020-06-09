@@ -27,10 +27,10 @@ public class SemaphoreTest {
                 public void run() {
                     try {
                         semaphor.acquire();
-                        System.out.println("Acessing:" + no);
-                        Thread.sleep(1000);
+                        System.out.println("acquire:" + no);
+                        Thread.sleep(2000);
                         semaphor.release();
-                        System.out.println("**" + semaphor.availablePermits());
+//                        System.out.println("......release**...." +no+"剩余可用数量是："+ semaphor.availablePermits());
                     } catch (Exception e) {
                         e.printStackTrace();
                     }

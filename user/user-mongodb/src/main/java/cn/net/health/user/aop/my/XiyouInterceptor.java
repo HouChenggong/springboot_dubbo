@@ -1,6 +1,7 @@
 package cn.net.health.user.aop.my;
 
 import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 
 /**
  * @author xiyou
@@ -22,14 +23,15 @@ public interface XiyouInterceptor {
     void after();
 
     /**
-     * 取代原有事件的方法
-     *
-     * @param invocation 可以通过他的proceed方法，回调原有事件
+     * 要环绕的方法
+     * @param params
+     * @param method
+     * @param target
      * @return
      * @throws InvocationTargetException
      * @throws IllegalAccessException
      */
-    Object around(XiyouInvocation invocation) throws InvocationTargetException, IllegalAccessException;
+    public Object around(Object[] params, Method method, Object target) throws InvocationTargetException, IllegalAccessException;
 
 
     /**
