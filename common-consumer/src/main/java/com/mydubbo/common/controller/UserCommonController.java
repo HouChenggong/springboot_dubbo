@@ -58,6 +58,7 @@ public class UserCommonController {
      */
     @GetMapping("/user/mycat")
     public List mycat(Integer id) {
-        return userCommonService.selectFromMycat(id);
+//        return userCommonService.selectFromMycat(id);
+        return null;
     }
 }

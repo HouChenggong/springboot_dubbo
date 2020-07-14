@@ -43,9 +43,9 @@ public class UserCommonServiceImpl extends ServiceImpl<UserCommonMapper, UserCom
     }
 
 
-    @DS("mycat_1")
-    public List selectFromMycat(Integer id) {
-        System.out.println("..................mycat_1");
-        return this.baseMapper.selectOneDatabase(id);
-    }
+//    @DS("mycat_1")
+//    public List selectFromMycat(Integer id) {
+//        System.out.println("..................mycat_1");
+//        return this.baseMapper.selectOneDatabase(id);
+//    }
 }

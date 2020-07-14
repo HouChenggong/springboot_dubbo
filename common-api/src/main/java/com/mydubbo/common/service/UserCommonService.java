@@ -19,11 +19,11 @@ public interface UserCommonService {
     List selectUserFromDsGroup(String key);
 
 
-    /**
-     * 从mycat里面查询
-     *
-     * @param id
-     * @return
-     */
-    List selectFromMycat(Integer id);
+//    /**
+//     * 从mycat里面查询
+//     *
+//     * @param id
+//     * @return
+//     */
+//    List selectFromMycat(Integer id);
 }
